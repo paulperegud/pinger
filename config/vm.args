@@ -1,0 +1,6 @@
+-sname pinger
+
+-setcookie pinger_cookie
+
++K true
++A30

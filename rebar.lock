@@ -1,0 +1,8 @@
+[{<<"eper">>,
+  {git,"https://github.com/massemanet/eper.git",
+       {ref,"f23776f716aaa8e8746ea4195a11df3605d6a885"}},
+  0},
+ {<<"websocket_client">>,
+  {git,"https://github.com/jeremyong/websocket_client.git",
+       {ref,"9a6f65d05ebf2725d62fb19262b21f1805a59fbf"}},
+  0}].
