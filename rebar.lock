@@ -1,8 +1,18 @@
-[{<<"eper">>,
+{"1.1.0",
+[{<<"bear">>,{pkg,<<"bear">>,<<"0.8.5">>},1},
+ {<<"eper">>,
   {git,"https://github.com/massemanet/eper.git",
        {ref,"f23776f716aaa8e8746ea4195a11df3605d6a885"}},
   0},
+ {<<"folsom">>,{pkg,<<"folsom">>,<<"0.8.5">>},0},
+ {<<"gproc">>,{pkg,<<"gproc">>,<<"0.6.1">>},0},
  {<<"websocket_client">>,
   {git,"https://github.com/jeremyong/websocket_client.git",
        {ref,"9a6f65d05ebf2725d62fb19262b21f1805a59fbf"}},
-  0}].
+  0}]}.
+[
+{pkg_hash,[
+ {<<"bear">>, <<"E95FCA1627CD9E15BAF93CE0A52AFF16917BAF325F0EE65B88CD715376CD2344">>},
+ {<<"folsom">>, <<"94A027B56FE84FEED264F9B33CB4C6AC9A801FAD84B87DBDA0836CE83C3B8D69">>},
+ {<<"gproc">>, <<"4579663E5677970758A05D8F65D13C3E9814EC707AD51D8DCEF7294EDA1A730C">>}]}
+].

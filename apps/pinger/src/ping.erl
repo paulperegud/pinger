@@ -14,34 +14,25 @@ start_link() ->
     websocket_client:start_link("wss://localhost:8443/websocket", ?MODULE, []).
 
 init([], _ConnState) ->
-    io:format("client init ~n"),
-    websocket_client:cast(self(), {text, <<"message 1">>}),
-    %% Execute a ping every 1000 milliseconds
-    {ok, 2, 1000}.
+    gproc:mreg(p, l, [{bot, true}]),
+    {ok, 0}.
 
-websocket_handle({pong, _Msg}, _ConnState, State) ->
-    io:format("Received pong ~n"),
-
-    %% This is how to access info about the connection/request
-    Proto = websocket_req:protocol(_ConnState),
-    io:format("On protocol: ~p~n", [Proto]),
-
-    {ok, State};
-websocket_handle({text, Msg}, _ConnState, 5) ->
-    io:format("Received msg ~p~n", [Msg]),
-    {close, <<>>, 10};
 websocket_handle({text, Msg}, _ConnState, State) ->
-    io:format("Received msg ~p~n", [Msg]),
-    timer:sleep(1000),
-    BinInt = list_to_binary(integer_to_list(State)),
-    Reply = {text, <<"hello, this is message #", BinInt/binary >>},
-    io:format("Replying: ~p~n", [Reply]),
-    {reply, Reply, State + 1}.
+    io:fwrite("got Msg: ~p~n", [Msg]),
+    folsom_metrics:notify(msg, erlang:system_time(milli_seconds), histogram),
+    {ok, State}.
+%% websocket_handle({text, Msg}, _ConnState, 5) ->
+%%     {close, <<>>, 10};
+%% websocket_handle({text, Msg}, _ConnState, State) ->
+%%     timer:sleep(1000),
+%%     BinInt = list_to_binary(integer_to_list(State)),
+%%     Reply = {text, <<"hello, this is message #", BinInt/binary >>},
+%%     {reply, Reply, State + 1}.
 
-websocket_info(start, _ConnState, State) ->
-    {reply, {text, <<"erlang message received">>}, State}.
+websocket_info(stop, _ConnState, State) ->
+    {close, <<>>, State}.
 
 websocket_terminate(Reason, _ConnState, State) ->
-    io:format("Websocket closed in state ~p wih reason ~p~n",
-              [State, Reason]),
+    %% io:format("Websocket closed in state ~p wih reason ~p~n",
+    %%           [State, Reason]),
     ok.

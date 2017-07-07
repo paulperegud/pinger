@@ -8,7 +8,7 @@
 -behaviour(supervisor).
 
 %% API
--export([one/0, start_link/0]).
+-export([many/1, start_link/0]).
 
 %% Supervisor callbacks
 -export([init/1]).
@@ -27,8 +27,8 @@
 start_link() ->
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
-one() ->
-    supervisor:start_child(?SERVER, []).
+many(N) ->
+    [ supervisor:start_child(?SERVER, []) || _ <- lists:seq(1, N) ].
 
 %%====================================================================
 %% Supervisor callbacks

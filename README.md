@@ -7,3 +7,7 @@ Build
 -----
 
     $ rebar3 compile
+
+Running bots
+-----
+pinger:start(N). %% where N is number of bots

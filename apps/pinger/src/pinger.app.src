@@ -8,7 +8,9 @@
     stdlib,
     crypto,
     ssl,
-    websocket_client
+    websocket_client,
+    gproc,
+    folsom
    ]},
   {env,[]},
   {modules, []},
